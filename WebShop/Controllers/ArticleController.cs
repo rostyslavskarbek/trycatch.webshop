@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
+using PagedList;
 using TryCatch.Dto;
 using TryCatch.Services.Article;
 using TryCatch.WebShop.Models;
@@ -16,11 +17,15 @@ namespace TryCatch.WebShop.Controllers
             _articleService = articleService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             var articlesDto = _articleService.GetArticles();
             var articles = Mapper.Map<IEnumerable<ArticleDto>, IEnumerable<Article>>(articlesDto);
-            return View(articles);
+            var model = new PagedList<Article>(articles, page, pageSize);
+
+            return Request.IsAjaxRequest()
+                ? (ActionResult)PartialView("ListOfArticles", model)
+                : View(model);
         }
 
         public ActionResult Details(string id)
