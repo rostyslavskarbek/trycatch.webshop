@@ -12,12 +12,14 @@ namespace TryCatch.WebShop
     {
         protected void Application_Start()
         {
+            IocConfig.RegisterDependencies();
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperWebConfig.Configure();
         }
     }
 }
