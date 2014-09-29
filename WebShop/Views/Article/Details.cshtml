@@ -10,40 +10,61 @@
     <legend>Article</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
+        @Html.DisplayNameFor(model => model.Name)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Name)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
+        @Html.DisplayNameFor(model => model.Price)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Price)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Description)
+        @Html.DisplayNameFor(model => model.Description)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Description)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Author)
+        @Html.DisplayNameFor(model => model.Author)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Author)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Publisher)
+        @Html.DisplayNameFor(model => model.Publisher)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Publisher)
     </div>
 </fieldset>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
+    <a href="#" class="AddLink" data-id="@Model.ArticleId">Add to cart</a>
 </p>
+<script type="text/javascript">
+    $(function () {
+        $(".AddLink").click(function () {
+            var articleToAdd = $(this).attr("data-id");
+            if (articleToAdd != '') {
+                $.post("/ShoppingCart/AddToCart", { "id": articleToAdd },
+                    function (data) {
+                        if (data.IsSuccessful == true) {
+                            $('#cart-items').fadeOut('slow').fadeIn('slow');
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+                        $("#cart-items").text("Cart (" + data.ItemsInCart + ")");
+                    });
+            }
+        });
+    });
+</script>
+

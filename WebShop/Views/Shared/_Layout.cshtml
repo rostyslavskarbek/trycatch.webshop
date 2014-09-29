@@ -6,14 +6,16 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div id="header">
         <h1>Web Shop</h1>
+        <h1>@Html.Partial("CartInfo")</h1>
     </div>
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

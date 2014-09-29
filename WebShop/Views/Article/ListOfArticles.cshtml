@@ -3,6 +3,7 @@
 
 @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
 <table>
     <tr>
         <th>Name
@@ -16,7 +17,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="row-@item.ArticleId">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -27,7 +28,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ArticleId })
+                @Html.ActionLink("Details", "Details", new { id = item.ArticleId })|
+                <a href="#" class="AddLink" data-id="@item.ArticleId">Add to cart</a>
             </td>
         </tr>
     }
@@ -35,6 +37,23 @@
 
 <div>
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-
-  PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "listOfArticles" }))
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "listOfArticles" }))
 </div>
+<script type="text/javascript">
+    $(function () {
+        $(".AddLink").click(function () {
+            var articleToAdd = $(this).attr("data-id");
+            if (articleToAdd != '') {
+                $.post("/ShoppingCart/AddToCart", { "id": articleToAdd },
+                    function (data) {
+                        if (data.IsSuccessful == true) {
+                            $('#row-' + data.ArticleId).fadeOut('slow').fadeIn('slow');
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+                        $("#cart-items").text("Cart (" + data.ItemsInCart + ")");
+                    });
+            }
+        });
+    });
+</script>

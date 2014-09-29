@@ -1,0 +1,9 @@
+﻿@Html.ActionLink("Cart", "Index", "ShoppingCart", null, new { id = "cart-items" })
+    <script type="text/javascript">
+        $(function () {
+            $.get("/ShoppingCart/ItemsInCart", null, function (data) {
+                $("#cart-items").text("Cart (" + data + ")");
+            });
+        });
+</script>
+

@@ -1,0 +1,59 @@
+﻿@model TryCatch.WebShop.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>Your Cart</h2>
+
+<table>
+    <tr>
+        <th>Name
+        </th>
+        <th>Author
+        </th>
+        <th>Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr id="row-@item.ArticleId">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details","Article", new { id = item.ArticleId }, null)|
+                <a href="#" class="RemoveLink" data-id="@item.ArticleId">Remove from cart</a>
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Go to shop", "Index", "Article")
+
+<script type="text/javascript">
+    $(function () {
+        $(".RemoveLink").click(function () {
+            var articleToRemove = $(this).attr("data-id");
+            if (articleToRemove != '') {
+                $.post("/ShoppingCart/RemoveFromCart", { "id": articleToRemove },
+                    function (data) {
+                        if (data.IsSuccessful == true) {
+                            $('#row-' + data.ArticleId).fadeOut('slow');
+                        } else {
+                            $('#error-message').text(data.ErrorMessage);
+                        }
+                        $("#cart-items").text("Cart (" + data.ItemsInCart + ")");
+                    });
+            }
+        });
+    });
+</script>
+
