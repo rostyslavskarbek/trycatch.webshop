@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32F95BA3-51F3-4210-89C4-D8E23664AA44}</ProjectGuid>
+    <ProjectGuid>{FC0D5B7F-0C02-43DC-8B95-9BDDEF16540F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TryCatch.Dto</RootNamespace>
-    <AssemblyName>TryCatch.Dto</AssemblyName>
+    <RootNamespace>TryCatch.Exceptions</RootNamespace>
+    <AssemblyName>TryCatch.Exceptions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,10 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleDto.cs" />
-    <Compile Include="CustomerDto.cs" />
+    <Compile Include="WebShopException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShoppingCartDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

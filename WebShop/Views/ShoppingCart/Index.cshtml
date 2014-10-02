@@ -6,7 +6,7 @@
 
 <h2>Your Cart</h2>
 
-<table>
+<table id="list-of-articles">
     <tr>
         <th>Name
         </th>
@@ -37,8 +37,10 @@
     }
 </table>
 @Html.ActionLink("Go to shop", "Index", "Article")
+@Html.ActionLink("Checkout", "Create", "Checkout", null, new {id="checkout-link"})
 
-<script type="text/javascript">
+<input type="hidden" id="items-in-cart" value="@Model.Items.Count">
+<script>
     $(function () {
         $(".RemoveLink").click(function () {
             var articleToRemove = $(this).attr("data-id");
@@ -51,9 +53,25 @@
                             $('#error-message').text(data.ErrorMessage);
                         }
                         $("#cart-items").text("Cart (" + data.ItemsInCart + ")");
+
+                        hideShowListOfArticlesAndCheckoutLink(data.ItemsInCart < 1);
                     });
             }
         });
     });
+    $(function () {
+        var items = $("#items-in-cart").val();
+        hideShowListOfArticlesAndCheckoutLink(items < 1);
+    });
+
+    function hideShowListOfArticlesAndCheckoutLink(doHide) {
+        if (doHide) {
+            $('#checkout-link').hide();
+            $('#list-of-articles').hide();
+        } else {
+            $('#checkout-link').show();
+            $('#list-of-articles').show();
+        }
+    }
 </script>
 

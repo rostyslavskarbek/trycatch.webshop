@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TryCatch.Dto;
 
-namespace TryCatch.Services.Article
+namespace TryCatch.Services
 {
     public interface IArticleService
     {

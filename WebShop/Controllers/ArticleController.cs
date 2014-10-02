@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using PagedList;
 using TryCatch.Dto;
-using TryCatch.Services.Article;
+using TryCatch.Services;
 using TryCatch.WebShop.Models;
 
 namespace TryCatch.WebShop.Controllers

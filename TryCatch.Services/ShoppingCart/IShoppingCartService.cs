@@ -9,5 +9,6 @@ namespace TryCatch.Services.ShoppingCart
         bool AddToShoppingCart(string articleId);
         bool RemoveFromShoppingCart(string articleId);
         Int32 GetItemsQuantityInCart();
+        void RemoveShoppingCart(string shoppingCartId);
     }
 }

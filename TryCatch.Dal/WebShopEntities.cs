@@ -7,6 +7,6 @@ namespace TryCatch.Dal
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ArticleToOrder> ArticleToOrders { get; set; }
+        public DbSet<Article> Articles { get; set; }
     }
 }

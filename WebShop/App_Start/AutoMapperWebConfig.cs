@@ -14,6 +14,8 @@ namespace TryCatch.WebShop
         private static void ConfigureWebModels()
         {
             Mapper.CreateMap<ArticleDto, Article>();
+            Mapper.CreateMap<CustomerDto, Customer>();
+            Mapper.CreateMap<Customer, CustomerDto>();
         }
     }
 }

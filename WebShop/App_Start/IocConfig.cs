@@ -2,7 +2,8 @@
 using Autofac;
 using Autofac.Integration.Mvc;
 using TryCatch.Repositories;
-using TryCatch.Services.Article;
+using TryCatch.Repositories.UnitOfWork;
+using TryCatch.Services;
 using TryCatch.Services.ShoppingCart;
 
 namespace TryCatch.WebShop
@@ -25,10 +26,18 @@ namespace TryCatch.WebShop
             builder.RegisterType<ShoppingCartService>()
                 .As<IShoppingCartService>()
                 .InstancePerHttpRequest();
+            builder.RegisterType<CheckoutService>()
+                .As<ICheckoutService>()
+                .InstancePerHttpRequest();
+
+            builder.RegisterType<UnitOfWork>()
+                .As<IUnitOfWork>()
+                .InstancePerDependency();
 
             builder.RegisterType<ArticleRepository>()
                 .As<IArticleRepository>()
                 .InstancePerHttpRequest();
+            
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

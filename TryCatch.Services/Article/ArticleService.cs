@@ -3,7 +3,7 @@ using System.Linq;
 using TryCatch.Dto;
 using TryCatch.Repositories;
 
-namespace TryCatch.Services.Article
+namespace TryCatch.Services
 {
     public class ArticleService : IArticleService
     {

@@ -5,7 +5,7 @@ using TryCatch.Dto;
 
 namespace TryCatch.Services.ShoppingCart
 {
-    public class ShoppingCartService:IShoppingCartService
+    public class ShoppingCartService : IShoppingCartService
     {
         private const string ShoppingCartIdKeyName = "ShoppingCartId";
         public ShoppingCartDto GetShoppingCart()
@@ -16,7 +16,7 @@ namespace TryCatch.Services.ShoppingCart
             {
                 cartId = Guid.NewGuid().ToString();
                 HttpContext.Current.Session[ShoppingCartIdKeyName] = cartId;
-                shoppingCart = new ShoppingCartDto {ShoppingCartId = cartId};
+                shoppingCart = new ShoppingCartDto { ShoppingCartId = cartId };
 
                 HttpContext.Current.Cache.Insert(shoppingCart.ShoppingCartId, shoppingCart, null,
                     Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(60));
@@ -25,7 +25,7 @@ namespace TryCatch.Services.ShoppingCart
             {
                 shoppingCart = HttpContext.Current.Cache.Get(cartId) as ShoppingCartDto;
                 if (shoppingCart != null) return shoppingCart;
-                
+
                 shoppingCart = new ShoppingCartDto { ShoppingCartId = cartId };
                 HttpContext.Current.Cache.Insert(shoppingCart.ShoppingCartId, shoppingCart, null,
                     Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(60));
@@ -59,6 +59,12 @@ namespace TryCatch.Services.ShoppingCart
         {
             var shoppintCart = GetShoppingCart();
             return shoppintCart.ArticleIds.Count;
+        }
+
+        public void RemoveShoppingCart(string shoppingCartId)
+        {
+            HttpContext.Current.Cache.Remove(shoppingCartId);
+            HttpContext.Current.Session.Remove(ShoppingCartIdKeyName);
         }
     }
 }

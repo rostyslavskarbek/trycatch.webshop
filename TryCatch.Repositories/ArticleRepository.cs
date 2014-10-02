@@ -33,7 +33,11 @@ namespace TryCatch.Repositories
         public override ArticleXml GetById(string id)
         {
             return ParentElement.Elements(ElementName)
-                   .Where(e => e.Element("ArticleId").Value == id)
+                   .Where(e =>
+                   {
+                       var xElement = e.Element("ArticleId");
+                       return xElement != null && xElement.Value == id;
+                   })
                    .Select(Selector).FirstOrDefault();
         }
 

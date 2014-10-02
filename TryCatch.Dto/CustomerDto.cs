@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TryCatch.Dal.Entities
+﻿namespace TryCatch.Dto
 {
-    public class Customer
+    public class CustomerDto
     {
-        [Key]
         public long CustomerId { get; set; }
         public string Title { get; set; }
         public string FirstName { get; set; }

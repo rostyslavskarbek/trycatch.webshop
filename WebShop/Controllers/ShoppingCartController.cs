@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
 using TryCatch.Dto;
-using TryCatch.Services.Article;
+using TryCatch.Services;
 using TryCatch.Services.ShoppingCart;
 using TryCatch.WebShop.Models;
 using TryCatch.WebShop.ViewModels;
@@ -23,8 +23,7 @@ namespace TryCatch.WebShop.Controllers
         public ActionResult Index()
         {
             var shoppingCartDto = _shoppingCartService.GetShoppingCart();
-            var shoppingCartModel = new ShoppingCart();
-            shoppingCartModel.CartId = shoppingCartDto.ShoppingCartId;
+            var shoppingCartModel = new ShoppingCart {CartId = shoppingCartDto.ShoppingCartId};
             foreach (var articleId in shoppingCartDto.ArticleIds)
             {
                 var articleDto = _articleService.GetArticleById(articleId);
