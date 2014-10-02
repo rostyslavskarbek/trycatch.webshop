@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using TryCatch.Dto;
@@ -8,6 +10,14 @@ namespace TryCatch.Services.ShoppingCart
     public class ShoppingCartService : IShoppingCartService
     {
         private const string ShoppingCartIdKeyName = "ShoppingCartId";
+
+        private readonly IArticleService _articleService;
+
+        public ShoppingCartService(IArticleService articleService)
+        {
+            _articleService = articleService;
+        }
+
         public ShoppingCartDto GetShoppingCart()
         {
             ShoppingCartDto shoppingCart;
@@ -65,6 +75,22 @@ namespace TryCatch.Services.ShoppingCart
         {
             HttpContext.Current.Cache.Remove(shoppingCartId);
             HttpContext.Current.Session.Remove(ShoppingCartIdKeyName);
+        }
+
+        public IEnumerable<ArticleDto> GetArticlesInCart()
+        {
+            var articles = new List<ArticleDto>();
+            var shoppingCart = GetShoppingCart();
+            if (shoppingCart == null || !shoppingCart.ArticleIds.Any()) return articles;
+            
+            foreach (var articleId in shoppingCart.ArticleIds)
+            {
+                var article = _articleService.GetArticleById(articleId);
+                if (article != null)
+                    articles.Add(article);
+            }
+
+            return articles;
         }
     }
 }

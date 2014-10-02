@@ -37,7 +37,7 @@
     }
 </table>
 @Html.ActionLink("Go to shop", "Index", "Article")
-@Html.ActionLink("Checkout", "Create", "Checkout", null, new {id="checkout-link"})
+@Html.ActionLink("Checkout", "Index", "Checkout", null, new {id="checkout-link"})
 
 <input type="hidden" id="items-in-cart" value="@Model.Items.Count">
 <script>

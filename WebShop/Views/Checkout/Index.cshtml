@@ -1,0 +1,39 @@
+﻿@model TryCatch.WebShop.ViewModels.CheckoutArticlesViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Articles</h2>
+
+<table>
+    <tr>
+        <th>
+            Article
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Articles) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+        </tr>
+    }
+</table>
+
+    <p>Price:</p>
+    <p>Total excl. VAT: @Html.DisplayFor(model => model.TotalPriceExcludingVat)</p>
+    <p>Total incl. VAT: @Html.DisplayFor(model => model.TotalPriceIncludingVat)</p>
+    <p>Total VAT: @Html.DisplayFor(model => model.TotalVat)</p>
+
+@Html.ActionLink("Go to cart", "Index", "ShoppingCart")
+@Html.ActionLink("Next", "Register", "Checkout")

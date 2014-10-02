@@ -1,28 +1,44 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using AutoMapper;
 using TryCatch.Dto;
 using TryCatch.Services;
+using TryCatch.Services.ShoppingCart;
 using TryCatch.WebShop.Models;
+using TryCatch.WebShop.ViewModels;
 
 namespace TryCatch.WebShop.Controllers
 {
     public class CheckoutController : Controller
     {
         private readonly ICheckoutService _checkoutService;
+        private readonly IShoppingCartService _shoppingCartService;
 
-        public CheckoutController(ICheckoutService checkoutService)
+        public CheckoutController(ICheckoutService checkoutService, IShoppingCartService shoppingCartService)
         {
             _checkoutService = checkoutService;
+            _shoppingCartService = shoppingCartService;
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Index()
         {
-            return View(new Customer{Address = "Legionow", EmailAddress = "rere@asds.com", City = "Wroclaw", FirstName = "Dutka", HouseNumber = "34", LastName = "Rootrr", Title = "Mrs", ZipCode = "4564"});
+            var vat = _checkoutService.GetVatValue();
+            var articlesDto = _shoppingCartService.GetArticlesInCart();
+            var articles = Mapper.Map<IEnumerable<ArticleDto>, IEnumerable<Article>>(articlesDto);
+            var model = new CheckoutArticlesViewModel(articles, vat);
+            
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View(new Customer());
         }
 
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Register(Customer customer)
         {
             var customerDto = Mapper.Map<CustomerDto>(customer);
              _checkoutService.CompleteCheckout(customerDto);

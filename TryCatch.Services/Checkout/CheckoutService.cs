@@ -10,6 +10,7 @@ namespace TryCatch.Services
 {
     public class CheckoutService: ICheckoutService
     {
+        private const decimal Vat = 0.18M;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -41,6 +42,11 @@ namespace TryCatch.Services
             _unitOfWork.Save();
 
             _shoppingCartService.RemoveShoppingCart(shoppingCart.ShoppingCartId);
+        }
+
+        public decimal GetVatValue()
+        {
+            return Vat;
         }
     }
 }

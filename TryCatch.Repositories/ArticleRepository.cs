@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using AutoMapper;
@@ -13,7 +14,9 @@ namespace TryCatch.Repositories
     {
         public ArticleRepository() : base("Article")
         {
-            Mapper.CreateMap<ArticleXml, ArticleDto>();
+            Mapper.CreateMap<ArticleXml, ArticleDto>()
+                .ForMember(dest=>dest.Price, opt => opt
+                    .MapFrom(src=> decimal.Parse(src.Price, CultureInfo.InvariantCulture)));
             Mapper.CreateMap<ArticleDto, ArticleXml>();
         }
 

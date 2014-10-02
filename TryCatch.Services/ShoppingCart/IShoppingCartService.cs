@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TryCatch.Dto;
 
 namespace TryCatch.Services.ShoppingCart
@@ -10,5 +11,6 @@ namespace TryCatch.Services.ShoppingCart
         bool RemoveFromShoppingCart(string articleId);
         Int32 GetItemsQuantityInCart();
         void RemoveShoppingCart(string shoppingCartId);
+        IEnumerable<ArticleDto> GetArticlesInCart();
     }
 }
