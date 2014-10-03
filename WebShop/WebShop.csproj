@@ -41,11 +41,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.3.1.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc">
+    <Reference Include="Autofac.Integration.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi">
+      <HintPath>..\packages\Autofac.WebApi.3.1.0\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
@@ -146,14 +151,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
+    <Compile Include="App_Start\MediaFormattersConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\ArticleController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Api\ArticleApi.cs" />
+    <Compile Include="Models\Api\ArticleDetailsApi.cs" />
+    <Compile Include="Models\Api\Response\Error.cs" />
+    <Compile Include="Models\Api\Response\RestResponse.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
@@ -278,6 +289,10 @@
     <ProjectReference Include="..\TryCatch.Services\TryCatch.Services.csproj">
       <Project>{b4e9968a-19e9-4574-bc68-a3e999675cc7}</Project>
       <Name>TryCatch.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TryCatch.WebCore\TryCatch.WebCore.csproj">
+      <Project>{52212EAD-BCE9-433D-B9BA-0E1817D6D006}</Project>
+      <Name>TryCatch.WebCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TryCatch.XmlDal\TryCatch.XmlDal.csproj">
       <Project>{78B18889-90F7-4850-A74A-8FB6B1A8AB89}</Project>

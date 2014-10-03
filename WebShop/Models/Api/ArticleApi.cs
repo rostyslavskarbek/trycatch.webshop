@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace TryCatch.WebShopApi.Models
+namespace TryCatch.WebShop.Models.Api
 {
-    public class Article
+    public class ArticleApi
     {
         [JsonProperty("artcileId")]
         public string ArticleId { get; set; }

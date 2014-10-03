@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TryCatch.WebShop.App_Start;
 
 namespace TryCatch.WebShop
 {
@@ -14,7 +15,7 @@ namespace TryCatch.WebShop
         {
             IocConfig.RegisterDependencies();
             AreaRegistration.RegisterAllAreas();
-
+            MediaFormattersConfig.Configure();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
