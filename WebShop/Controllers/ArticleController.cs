@@ -34,5 +34,10 @@ namespace TryCatch.WebShop.Controllers
             var articleDetails = Mapper.Map<ArticleDto, Article>(articleDto);
             return View(articleDetails);
         }
+
+        public ActionResult ArticlesOverview()
+        {
+            return View();
+        }
     }
 }

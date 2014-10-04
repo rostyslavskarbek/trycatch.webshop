@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Articles Overview";
+    Layout = string.Empty;
+}
+<html>
+    <head>
+        <title>Articles Overview</title>
+
+        <script type="text/javascript" src="@Url.Content("/Scripts/jquery-1.8.2.min.js")"></script>       
+        <script type="text/javascript" src="@Url.Content("/Scripts/handlebars.js")"></script>
+        <script type="text/javascript" src="@Url.Content("/Scripts/article-popup.js")"></script>
+        <link type="text/css" href="@Url.Content("/Content/ArticlesOverview.css")" rel="stylesheet"/>
+    </head>
+    <body onclick="check(event)">
+        <h2>Articles Overview</h2>
+        <h3>@Html.ActionLink("Go to shop", "Index", "Article")</h3>
+        <div id="articlesOverview"></div>
+        <div id="popupContainer">
+            <div id="popupArticle">
+                <div id="articleDetails"></div>
+            </div>
+        </div>
+
+<script id="articleTemplate" type="text/x-handlebars-template">
+<ul>
+{{#each .}}
+<li>
+    <div class="article" data-id="{{articleId}}">
+        {{name}}
+        {{price}}
+    </div>
+</li>
+{{/each}}
+</ul> 
+</script>
+<script id="articleDetailsTemplate" type="text/x-handlebars-template">
+    <img id="close" src="@Url.Content("/Content/Images/close.png")" alt="X">
+    <h2>{{name}}</h2>
+    <hr>
+    <div class="article-field">Description: <span class="article-field-value">{{description}}</span></div>
+    <div class="article-field">Author: <span class="article-field-value">{{author}}</span></div>
+    <div class="article-field">Publisher: <span class="article-field-value">{{publisher}}</span></div>
+    <div class="article-field">Price (excl. VAT): <span class="article-field-value">{{price}}</span></div>
+</script>
+      <script>
+            $(function () {
+                $.get("/api/article", null, function (response) {
+                    var source = $("#articleTemplate").html();
+                    var template = Handlebars.compile(source);
+                    var generatedHtml = template(response.data);
+                    $("#articlesOverview").html(generatedHtml);
+                });
+
+                $("#articlesOverview").on("click", ".article", function (event) {
+                    var articleId = $(this).attr("data-id");
+                    $.get("/api/article/" + articleId, null, function (response) {
+                        var source = $("#articleDetailsTemplate").html();
+                        var template = Handlebars.compile(source);
+                        var generatedHtml = template(response.data);
+                        $("#articleDetails").html(generatedHtml);
+                    });
+                    showPopUp();
+                    event.stopPropagation();
+                });
+            })
+        </script> 
+    </body>
+</html>

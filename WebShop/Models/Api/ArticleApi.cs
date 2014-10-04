@@ -4,7 +4,7 @@ namespace TryCatch.WebShop.Models.Api
 {
     public class ArticleApi
     {
-        [JsonProperty("artcileId")]
+        [JsonProperty("articleId")]
         public string ArticleId { get; set; }
 
         [JsonProperty("name")]

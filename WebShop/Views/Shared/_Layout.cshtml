@@ -11,7 +11,8 @@
 <body>
     <div id="header">
         <h1>Web Shop</h1>
-        <h1>@Html.Partial("CartInfo")</h1>
+        <h2>@Html.ActionLink("Articles Overview", "ArticlesOverview", "Article")</h2>
+        <h3>@Html.Partial("CartInfo")</h3>
     </div>
     @RenderBody()
 
