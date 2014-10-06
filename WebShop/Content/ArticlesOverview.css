@@ -4,7 +4,6 @@
     cursor: pointer;
 }
 
-@import "http://fonts.googleapis.com/css?family=Raleway";
 /*----------------------------------------------
 CSS settings for HTML div Exact Center
 ------------------------------------------------*/
@@ -30,15 +29,13 @@ position:absolute;
 left:50%;
 top:17%;
 margin-left:-202px;
-font-family:'Raleway',sans-serif
 }
 #articleDetails {
-max-width:300px;
-min-width:250px;
+max-width:430px;
+min-width:300px;
 padding:10px 50px;
 border:2px solid gray;
 border-radius:10px;
-font-family:raleway;
 background-color:#fff
 }
 p {

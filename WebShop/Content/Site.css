@@ -1,41 +1,30 @@
 ﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+        
+    padding-top: 20px;
+    padding-bottom: 40px;
 }
 
-header, footer, nav, section {
-    display: block;
+.container-narrow {
+    margin: 25px 50px 10px 90px;
+    max-width: 700px;
 }
 
-
-/* Styles for basic forms
------------------------------------------------------------*/
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+.container-narrow > hr {
+        margin: 30px 0;
+    }
+.masthead {
+    max-width: 700px;
 }
-
-legend {
-    font-size: 1.2em;
+.navigation-buttons {
+    margin: 10px 0 0 0;
+}
+.price-value {
     font-weight: bold;
 }
 
-textarea {
-    min-height: 75px;
+#articlesOverview {
+    max-width: 400px;
 }
-
-.editor-label {
-    margin: 1em 0 0 0;
-}
-
-.editor-field {
-    margin: 0.5em 0 0 0;
-}
-
-
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

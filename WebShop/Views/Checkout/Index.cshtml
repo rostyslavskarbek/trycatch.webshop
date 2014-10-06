@@ -5,19 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Articles</h2>
+<h2>Choosen items</h2>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
     <tr>
-        <th>
-            Article
+        <th>Article
         </th>
-        <th>
-            Price
+        <th>Price
         </th>
     </tr>
 
-    @foreach (var item in Model.Articles) 
+    @foreach (var item in Model.Articles)
     {
         <tr>
             <td>
@@ -29,11 +27,13 @@
         </tr>
     }
 </table>
-
-    <p>Price:</p>
-    <p>Total excl. VAT: @Html.DisplayFor(model => model.TotalPriceExcludingVat)</p>
-    <p>Total incl. VAT: @Html.DisplayFor(model => model.TotalPriceIncludingVat)</p>
-    <p>Total VAT: @Html.DisplayFor(model => model.TotalVat)</p>
-
-@Html.ActionLink("Go to cart", "Index", "ShoppingCart")
-@Html.ActionLink("Next", "Register", "Checkout")
+<fieldset>
+<legend>Price</legend>
+    <div>Total excl. VAT: <span class="price-value">@Html.DisplayFor(model => model.TotalPriceExcludingVat)</span></div>
+    <div>Total incl. VAT: <span class="price-value">@Html.DisplayFor(model => model.TotalPriceIncludingVat)</span></div>
+    <div>Total VAT: <span class="price-value">@Html.DisplayFor(model => model.TotalVat)</span></div>
+</fieldset>
+<div class="navigation-buttons">
+    @Html.ActionLink("Back to cart", "Index", "ShoppingCart", null, new { @class = "btn  btn-primary" })
+    @Html.ActionLink("Next", "Register", "Checkout", null, new { @class = "btn  btn-primary" })
+</div>

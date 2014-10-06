@@ -45,10 +45,10 @@
     </div>
 </fieldset>
 
-<p>
-    @Html.ActionLink("Back to List", "Index")
+<div class="navigation-buttons">
+    @Html.ActionLink("Back to List", "Index", null, new{ @class = "btn  btn-primary"})
     <a href="#" class="AddLink" data-id="@Model.ArticleId">Add to cart</a>
-</p>
+</div>
 <script type="text/javascript">
     $(function () {
         $(".AddLink").click(function () {

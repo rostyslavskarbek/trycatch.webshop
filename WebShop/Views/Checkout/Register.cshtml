@@ -4,88 +4,103 @@
     ViewBag.Title = "Registration";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Customer</legend>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <td colspan="2">
+                <div>
+                    @Html.LabelFor(model => model.Title)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.FirstName)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.FirstName)
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </td>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.LastName)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.LastName)
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.Address)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.Address)
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </td>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.HouseNumber)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.HouseNumber)
+                    @Html.ValidationMessageFor(model => model.HouseNumber)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.ZipCode)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.ZipCode)
+                    @Html.ValidationMessageFor(model => model.ZipCode)
+                </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FirstName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Address)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HouseNumber)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HouseNumber)
-            @Html.ValidationMessageFor(model => model.HouseNumber)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ZipCode)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ZipCode)
-            @Html.ValidationMessageFor(model => model.ZipCode)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.City)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EmailAddress)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EmailAddress)
-            @Html.ValidationMessageFor(model => model.EmailAddress)
-        </div>
-
-        <p>
-            <input type="submit" value="Complete your order" />
-        </p>
-    </fieldset>
+            </td>
+            <td>
+                <div>
+                    @Html.LabelFor(model => model.City)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.City)
+                    @Html.ValidationMessageFor(model => model.City)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    @Html.LabelFor(model => model.EmailAddress)
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.EmailAddress)
+                    @Html.ValidationMessageFor(model => model.EmailAddress)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="navigation-buttons">
+        @Html.ActionLink("Back to Cart", "Index", "ShoppingCart", null, new { @class = "btn  btn-primary" })
+        <input type="submit" value="Complete your order" class="btn btn-primary" />
+    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to Cart", "Index", "ShoppingCart")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

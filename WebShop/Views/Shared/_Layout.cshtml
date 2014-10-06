@@ -7,16 +7,26 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", false)
 </head>
 <body>
-    <div id="header">
-        <h1>Web Shop</h1>
-        <h2>@Html.ActionLink("Articles Overview", "ArticlesOverview", "Article")</h2>
-        <h3>@Html.Partial("CartInfo")</h3>
+    <div class="container">
+        <div class="page-header">
+            <h3 class="pull-right">@Html.Partial("CartInfo")</h3>
+            <h2 class="text-muted">Web Shop</h2>
+            <p>@Html.ActionLink("Articles Overview", "ArticlesOverview", "Article")</p>
+        </div>
+        <div id="body" class="container">
+            <section>
+                @RenderBody()
+            </section>
+        </div>
+        <hr />
+        <div id="footer">
+            <div class="container">
+                <p class="text-muted">&copy; @DateTime.Now.Year - Design and devloped by Rostyslav Skarbek.</p>
+            </div>
+        </div>
     </div>
-    @RenderBody()
-
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>
