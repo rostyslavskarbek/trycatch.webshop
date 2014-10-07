@@ -25,6 +25,17 @@
 #articlesOverview {
     max-width: 400px;
 }
+
+.error-message {
+    color: #f00;
+}
+.article-field {
+    font-weight: bold;
+}
+.article-field-value {
+    font-weight: normal;
+    font-style: italic;
+}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

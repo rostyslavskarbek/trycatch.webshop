@@ -35,6 +35,9 @@
             {{/each}}
         </ul>
     </script>
+    <script id="articleTemplateError" type="text/x-handlebars-template">
+        <h4 class="error-message">{{message}}</h4>
+    </script>
     <script id="articleDetailsTemplate" type="text/x-handlebars-template">
         <img id="close" src="@Url.Content("/Content/Images/close.png")" alt="X">
         <h2>{{name}}</h2>
@@ -44,21 +47,43 @@
         <div class="article-field">Publisher: <span class="article-field-value">{{publisher}}</span></div>
         <div class="article-field">Price (excl. VAT): <span class="article-field-value">{{price}}</span></div>
     </script>
+    <script id="articleDetailsTemplateError" type="text/x-handlebars-template">
+        <img id="close" src="@Url.Content("/Content/Images/close.png")" alt="X">
+        <h4 class="error-message">{{message}}</h4>
+    </script>
     <script>
         $(function () {
             $.get("/api/article", null, function (response) {
-                var source = $("#articleTemplate").html();
+                var templateName;
+                var templateData;
+                if (response.status == "Failed") {
+                    templateName = "#articleTemplateError";
+                    templateData = response.error;
+                } else {
+                    templateName = "#articleTemplate";
+                    templateData = response.data;
+                }
+                var source = $(templateName).html();
                 var template = Handlebars.compile(source);
-                var generatedHtml = template(response.data);
+                var generatedHtml = template(templateData);
                 $("#articlesOverview").html(generatedHtml);
             });
 
             $("#articlesOverview").on("click", ".article", function (event) {
                 var articleId = $(this).attr("data-id");
                 $.get("/api/article/" + articleId, null, function (response) {
-                    var source = $("#articleDetailsTemplate").html();
+                    var templateName;
+                    var templateData;
+                    if (response.status == "Failed") {
+                        templateName = "#articleDetailsTemplateError";
+                        templateData = response.error;
+                    } else {
+                        templateName = "#articleDetailsTemplate";
+                        templateData = response.data;
+                    }
+                    var source = $(templateName).html();
                     var template = Handlebars.compile(source);
-                    var generatedHtml = template(response.data);
+                    var generatedHtml = template(templateData);
                     $("#articleDetails").html(generatedHtml);
                 });
                 showPopUp();

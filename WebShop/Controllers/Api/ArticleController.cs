@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using AutoMapper;
 using TryCatch.Dto;
 using TryCatch.Services;
-using TryCatch.WebShop.Models;
 using TryCatch.WebShop.Models.Api;
 using TryCatch.WebShop.Models.Api.Response;
 
 namespace TryCatch.WebShop.Controllers.Api
 {
-    public class ArticleController : ApiController
+    public class ArticleController : ApiControllerBase
     {
         private readonly IArticleService _articleService;
 

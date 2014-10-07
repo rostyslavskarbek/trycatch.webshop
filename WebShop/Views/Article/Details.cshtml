@@ -4,50 +4,30 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <fieldset>
     <legend>Article</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Name)
+    <div class="article-field">@Html.DisplayNameFor(model => model.Name): 
+        <span class="article-field-value"> @Html.DisplayFor(model => model.Name)</span>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+    <div class="article-field">@Html.DisplayNameFor(model => model.Price): 
+        <span class="article-field-value"> @Html.DisplayFor(model => model.Price)</span>
     </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Price)
+    <div class="article-field">@Html.DisplayNameFor(model => model.Description): 
+        <span class="article-field-value"> @Html.DisplayFor(model => model.Description)</span>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
+    <div class="article-field">@Html.DisplayNameFor(model => model.Author): 
+        <span class="article-field-value"> @Html.DisplayFor(model => model.Author)</span>
     </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Author)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Author)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Publisher)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Publisher)
+    <div class="article-field">@Html.DisplayNameFor(model => model.Publisher): 
+        <span class="article-field-value"> @Html.DisplayFor(model => model.Name)</span>
     </div>
 </fieldset>
 
 <div class="navigation-buttons">
     @Html.ActionLink("Back to List", "Index", null, new{ @class = "btn  btn-primary"})
-    <a href="#" class="AddLink" data-id="@Model.ArticleId">Add to cart</a>
+    <a href="#" class="AddLink btn btn-primary" data-id="@Model.ArticleId">Add to cart</a>
 </div>
 <script type="text/javascript">
     $(function () {

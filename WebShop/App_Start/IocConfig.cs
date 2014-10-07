@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
@@ -8,6 +7,9 @@ using TryCatch.Repositories;
 using TryCatch.Repositories.UnitOfWork;
 using TryCatch.Services;
 using TryCatch.Services.ShoppingCart;
+using TryCatch.WebCore.Logger;
+using TryCatch.WebShop.Controllers.Api;
+using TryCatch.WebShop.Filters;
 
 namespace TryCatch.WebShop
 {
@@ -23,6 +25,12 @@ namespace TryCatch.WebShop
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof (MvcApplication).Assembly);
             builder.RegisterApiControllers(typeof (MvcApplication).Assembly);
+            builder.RegisterFilterProvider();
+            builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
+
+            builder.RegisterType<WebShopLogger>()
+                .As<IWebShopLogger>()
+                .SingleInstance();
 
             builder.RegisterType<ArticleService>()
                 .As<IArticleService>()
@@ -41,7 +49,9 @@ namespace TryCatch.WebShop
             builder.RegisterType<ArticleRepository>()
                 .As<IArticleRepository>()
                 .InstancePerHttpRequest();
-            
+
+            builder.Register(c => new ApiCustomExceptionFilterAttribute(c.Resolve<IWebShopLogger>()))
+                .AsWebApiExceptionFilterFor<ApiControllerBase>();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

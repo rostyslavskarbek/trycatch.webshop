@@ -8,7 +8,7 @@ using TryCatch.WebShop.Models;
 
 namespace TryCatch.WebShop.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : WebControllerBase
     {
         private readonly IArticleService _articleService;
 

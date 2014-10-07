@@ -8,7 +8,7 @@ using TryCatch.WebShop.ViewModels;
 
 namespace TryCatch.WebShop.Controllers
 {
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : WebControllerBase
     {
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IArticleService _articleService;

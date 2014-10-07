@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using TryCatch.WebCore.Enum;
 
 namespace TryCatch.WebShop.Models.Api.Response
@@ -7,6 +8,7 @@ namespace TryCatch.WebShop.Models.Api.Response
     public class RestResponse
     {
         [JsonProperty("status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public ResponseStatus Status { get; set; }
 
         [JsonProperty("data")]
@@ -14,6 +16,10 @@ namespace TryCatch.WebShop.Models.Api.Response
 
         [JsonProperty("error")]
         public Error Error { get; set; }
+
+        private RestResponse()
+        {
+        }
 
         public static RestResponse Ok(object data)
         {
