@@ -12,7 +12,7 @@ namespace TryCatch.Repositories
 {
     public class ArticleRepository : EntityXmlRepository<ArticleXml>, IArticleRepository
     {
-        public ArticleRepository() : base("Article")
+        public ArticleRepository() : base(XmlNames.Article)
         {
             Mapper.CreateMap<ArticleXml, ArticleDto>()
                 .ForMember(dest=>dest.Price, opt => opt
@@ -38,7 +38,7 @@ namespace TryCatch.Repositories
             return ParentElement.Elements(ElementName)
                    .Where(e =>
                    {
-                       var xElement = e.Element("ArticleId");
+                       var xElement = e.Element(XmlNames.ArticleId);
                        return xElement != null && xElement.Value == id;
                    })
                    .Select(Selector).FirstOrDefault();
@@ -60,12 +60,12 @@ namespace TryCatch.Repositories
             {
                 return x => new ArticleXml
                 {
-                    ArticleId = x.Element("ArticleId").Value,
-                    Name = x.Element("Name").Value,
-                    Price = x.Element("Price").Value,
-                    Description = x.Element("Description").Value,
-                    Author = x.Element("Author").Value,
-                    Publisher = x.Element("Publisher").Value
+                    ArticleId = x.Element(XmlNames.ArticleId).Value,
+                    Name = x.Element(XmlNames.Name).Value,
+                    Price = x.Element(XmlNames.Price).Value,
+                    Description = x.Element(XmlNames.Description).Value,
+                    Author = x.Element(XmlNames.Author).Value,
+                    Publisher = x.Element(XmlNames.Publisher).Value
                 };
             }
         }

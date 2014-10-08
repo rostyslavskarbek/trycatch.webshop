@@ -45,6 +45,7 @@
     <Compile Include="IXmlRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XDocumentProvider.cs" />
+    <Compile Include="XmlNames.cs" />
     <Compile Include="XmlRepositoryBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
